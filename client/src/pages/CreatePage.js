@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
-// import { AuthContext } from '../context/Auth.context'
+import { AuthContext } from '../context/Auth.context'
 import {useHistory} from 'react-router-dom'
 import {ock_contacts} from '../jsondata.js'
 import M from 'materialize-css'
@@ -9,7 +9,7 @@ import M from 'materialize-css'
 
 export const CreatePage = () => {
     const history = useHistory()
-    // const auth = useContext(AuthContext)
+    const auth = useContext(AuthContext)
     const message = useMessage()
     const {loading, request, error, clearError} = useHttp()
 
@@ -42,12 +42,17 @@ export const CreatePage = () => {
 
     const sendForm = async () => {
             try {
-                    const data = await request('/api/bid/create', 'POST', {...form}) 
+                    const data = await request('/api/bid/create', 'POST', {...form}, {Authorization: `Bearer ${auth.token}`}) 
                     message(data.message)
                     data && console.log(data)
+                    if (auth.isAuthenticated) {
+                        console.log("Link to - " + data.bid._id);
+                        history.push(`/detail/${data.bid._id}`)
+                    } else {
+                        history.push(`/`)
+                    }
             } catch (e) {}
             // Делаем редирект на главную страницу
-            history.push(`/`)
     }
 
     useEffect(() => {
@@ -69,7 +74,7 @@ export const CreatePage = () => {
 
     return (
         <div className="row">
-        <h2>Создать заявку</h2>
+        <h2 className="center">Создать заявку</h2>
             <div className="col s8 offset-s2 createpage">
             <form className="col s12">
                     <select className="browser-default" id="title" onChange={handleChange} value={form.title}>
@@ -119,7 +124,8 @@ export const CreatePage = () => {
                             id="creator"
                             type="text" 
                             maxLength="50"
-                            className="autocomplete" 
+                            className="autocomplete"
+                            autoComplete="off" 
                             onChange={handleChange}
                             value={form.creator}
                         />

@@ -36,3 +36,24 @@
     min-width: 100px;
     top: 65px !important;
 }
+
+
+@media print {
+    body {
+        color: #000;
+        background: #fff;
+    }
+    nav, aside {
+        display: none;
+    }
+    table {
+        font-size: 10px;
+    }
+    .printhead {
+        min-width: 100%;
+        min-height: 5cm;
+        background-image: url(https://donor-kostanay.kz/images/new_logo_rus.png);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}

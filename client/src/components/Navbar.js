@@ -51,7 +51,7 @@ export const Navbar = () => {
             <ul id="nav-mobile" className="right hide-on-med-and-down">
                 <li><NavLink to="/">Главная</NavLink></li>
                 <li><NavLink to="/create">Создать</NavLink></li>
-                <li><NavLink to ="/links">Ссылки</NavLink></li>
+                <li><NavLink to ="/bids">Заявки</NavLink></li>
                 <li><a className="dropdown-trigger" href="#!" data-target="dropdown1" >Сотрудникам<i className="material-icons right">arrow_drop_down</i></a></li>
                 {(auth.isAuthenticated && <li><a href="/" onClick={logoutHandler}>Exit</a></li>) || <li><NavLink to ="/login"><i className="material-icons">person</i></NavLink></li>}  
             </ul>

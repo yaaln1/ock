@@ -24,10 +24,11 @@ function App() {
     
       <Router>
       <Navbar />
-      
+      <div className="printhead" />
         <div className="container">
           {routes}
         </div>
+
       </Router>
     </AuthContext.Provider>
   );
