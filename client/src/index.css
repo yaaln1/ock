@@ -1,0 +1,38 @@
+@import "~materialize-css/dist/css/materialize.min.css";
+
+.authcard button {
+    margin-right: 10px;
+}
+.authcard input {
+    border-bottom: 1px solid #fff;
+    box-shadow: 0 1px 0 0 #fff;
+}
+.authcard input + label {
+    color: #fff;
+}
+.authcard input:focus + label {
+    color: #ffeb3b !important;
+}
+.authcard input:focus {
+    border-bottom: 1px solid #ffeb3b !important;
+    box-shadow: 0 1px 0 0 #ffeb3b !important;
+}
+
+.padding_top {
+    padding-top: 10%;
+}
+
+.navbar {
+    padding: 0 2rem;
+}
+
+.preloadcomp {
+    display: flex;
+    justify-content: center;
+    margin: 25% auto;
+}
+
+.dropdown-content {
+    min-width: 100px;
+    top: 65px !important;
+}
