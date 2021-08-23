@@ -17,12 +17,9 @@ const bidSchema = new Schema({
         required: true
     },
     cabinetnumber: {
-        type: Number
-    },
-    creator: {
         type: String
     },
-    creatorid: {
+    creator: {
         type: String
     },
     status: {
@@ -35,9 +32,6 @@ const bidSchema = new Schema({
     executor: {
         type: Types.ObjectId,
         ref: 'User'
-    },
-    executorid: {
-        type: String
     },
     completemessage: {
         type: String
