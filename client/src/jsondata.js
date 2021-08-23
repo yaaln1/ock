@@ -8,4 +8,6 @@ const ock_contacts = {
     "Подчинёнова Светлана Владимировна": null
 }
 
-export {ock_contacts}
+const ock_department = ['ОТК', 'Регистратура', 'Выбраковка', 'Экспедиция', 'Бухгалтерия']
+
+export {ock_contacts, ock_department}
