@@ -42,6 +42,7 @@ export const AuthPage = () => {
             auth.login(data.token, data.userId, data.firstname, data.fio, data.role)
             console.log(data)
 
+
         } catch (e) {
         }
     }

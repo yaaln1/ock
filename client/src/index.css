@@ -52,7 +52,7 @@
     .printhead {
         min-width: 100%;
         min-height: 5cm;
-        background-image: url(https://donor-kostanay.kz/images/new_logo_rus.png);
+        background-image: url("./images/new_logo_rus.png");
         background-repeat: no-repeat;
         background-position: center;
     }

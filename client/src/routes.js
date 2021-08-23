@@ -9,8 +9,8 @@ import { RegistrationPage } from "./pages/RegistrationPage"
 
 
 
-export const useRoutes = (isAuthenticated) => {
-    if (isAuthenticated) {
+export const useRoutes = (isAuthenticated, role) => {
+    if (isAuthenticated && role === 'admin') {
         return (
             <Switch>
                 <Route path="/reg_admin_new" exact>
@@ -38,9 +38,8 @@ export const useRoutes = (isAuthenticated) => {
             <Route path="/reg_admin_new" exact>
                 <RegistrationPage />
             </Route>
-            <Route path="/login" exact>
-                <AuthPage />
-            </Route>
+            {(!isAuthenticated) && <Route path="/login" exact> <AuthPage /> </Route>}
+
             <Route path="/create" exact>
                     <CreatePage />
                 </Route>

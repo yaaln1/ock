@@ -1,4 +1,5 @@
 const {Schema, model} = require('mongoose')
+const Message = require('./Message')
 
 const userSchema = new Schema({
     login: {
@@ -24,7 +25,8 @@ const userSchema = new Schema({
     role: {
         type: String,
         default: 'user'
-    }
+    },
+    message: [ Message.schema ]
 })
 
 module.exports = model('User', userSchema)

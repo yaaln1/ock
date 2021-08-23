@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const {check, validationResult} = require('express-validator')
 const User = require ('../models/User')
 const Bid = require ('../models/Bid')
+const Message = require('../models/Message')
 const auth = require ('../middleware/auth.middleware')
 const router = Router()
 
@@ -31,6 +32,18 @@ router.post('/create',
         const {title, createmessage, department, cabinetnumber, creator} = req.body
         const bid = new Bid({title, createmessage, department, cabinetnumber, creator})
         await bid.save()
+
+        const idForAdmin = bid._id
+        const linkForAdmin = process.env.BASE_URL + '/detail/' + idForAdmin
+        const detailForAdmin = `Создана заявка №${idForAdmin} от ${creator} отделения ${department}.`
+        const titleForAdmin = title
+
+        const messageForAdmin = new Message({title: titleForAdmin, link: linkForAdmin, detail: detailForAdmin})
+        const result = await messageForAdmin.save()
+        await User.updateMany({"role": 'admin'}, {"message": result})
+        console.log(result)
+
+        // await User.updateMany({"role": 'admin'}, {"message.id": idForAdmin, "message.status": true, "message.title": titleForAdmin, "message.link": linkForAdmin, "message.detail": detailForAdmin})
 
         res.status(201).json({bid, message: "Заявка успешно создана"})
 
