@@ -1,6 +1,7 @@
 const {Schema, model} = require('mongoose')
 const Message = require('./Message')
 
+
 const userSchema = new Schema({
     login: {
         type: String,
@@ -26,7 +27,12 @@ const userSchema = new Schema({
         type: String,
         default: 'user'
     },
-    message: [ Message.schema ]
+    message: [ {
+        status: Boolean,
+        title: String,
+        detail: String,
+        link: String
+    } ]
 })
 
 module.exports = model('User', userSchema)

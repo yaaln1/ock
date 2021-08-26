@@ -42,13 +42,18 @@ export const CreatePage = () => {
 
     const sendForm = async () => {
             try {
+                // отправляем данные, полученные с формы для формирования и сохранения заявки в БД
                     const data = await request('/api/bid/create', 'POST', {...form}, {Authorization: `Bearer ${auth.token}`}) 
+                // получаем результат и выводим сообщение об ошибке или успешном результате
+                // получаем Id новой заявки    
                     message(data.message)
-                    data && console.log(data)
-                    if (auth.isAuthenticated) {
-                        console.log("Link to - " + data.bid._id);
-                        history.push(`/detail/${data.bid._id}`)
+                // Проверяем - авторизован ли пользователь
+                    if (auth.isAuthenticated && auth.role === 'admin') {
+                // Да - показываем детальную страницу заявки        
+                        history.push(`/detail/${data.bidId}`)
                     } else {
+                // Нет - отправляем на главную страницу, где пользователь получает PopUp
+                // сообщение об успешном создании заявки         
                         history.push(`/`)
                     }
             } catch (e) {}

@@ -5,7 +5,7 @@ import { useAuth } from "./hooks/auth.hook"
 import { AuthContext } from "./context/Auth.context"
 import { Navbar } from "./components/Navbar"
 import { Loader }  from "./components/Loader"
-import 'materialize-css'
+import  'materialize-css'
 
 
 
@@ -17,18 +17,20 @@ function App() {
     return <Loader />
   }
 
+
+
   return (
     <AuthContext.Provider value={{
       token, login, logout, userId, firstname, fio, role, isAuthenticated
     }}>
     
       <Router>
+      
       <Navbar />
       <div className="printhead" />
         <div className="container">
           {routes}
         </div>
-
       </Router>
     </AuthContext.Provider>
   );

@@ -2,7 +2,7 @@ require('dotenv').config()
 const {Router} = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {check, validationResult} = require('express-validator')
+const {check, validationResult, Result} = require('express-validator')
 const User = require ('../models/User')
 const Bid = require ('../models/Bid')
 const Message = require('../models/Message')
@@ -29,23 +29,34 @@ router.post('/create',
                 message: allerror[0].msg
             })
         }
+        // создается заявка со страницы CreatePage
         const {title, createmessage, department, cabinetnumber, creator} = req.body
         const bid = new Bid({title, createmessage, department, cabinetnumber, creator})
         await bid.save()
+        // Заявка сохранена
 
-        const idForAdmin = bid._id
-        const linkForAdmin = process.env.BASE_URL + '/detail/' + idForAdmin
-        const detailForAdmin = `Создана заявка №${idForAdmin} от ${creator} отделения ${department}.`
-        const titleForAdmin = title
-
-        const messageForAdmin = new Message({title: titleForAdmin, link: linkForAdmin, detail: detailForAdmin})
+        // Собираем сообщение для администраторов о созданной заявке
+        // добавляем ссылку на детальную страницу заявки и готовим шаблон сообщения
+        const linkForAdmin = process.env.HOME_URL + '/detail/' + bid._id
+        const detailForAdmin = `Создана заявка №${bid._id} от ${creator} отделения ${department}.`
+        // Все готово - сохраняем новое сообщение в базу данных
+        const messageForAdmin = new Message({title, link: linkForAdmin, detail: detailForAdmin})
         const result = await messageForAdmin.save()
-        await User.updateMany({"role": 'admin'}, {"message": result})
-        console.log(result)
+        // в переменной result сохранено сообщение, которое мы отправим каждому администратору        
 
-        // await User.updateMany({"role": 'admin'}, {"message.id": idForAdmin, "message.status": true, "message.title": titleForAdmin, "message.link": linkForAdmin, "message.detail": detailForAdmin})
-
-        res.status(201).json({bid, message: "Заявка успешно создана"})
+        // Не придумал ничего лучше, чем собрать Id всех админов
+        const adminusers = await User.find({ role: 'admin' }, '_id')
+        // и с помощью map сделать запись о новом сообщении каждому
+        adminusers.map((oneuser) => {
+                User.findById(oneuser._id, function (err, user) {
+                user.message.push(result)
+                user.save()
+                })
+        })
+        // отправляем результат для перехода на детальную страницу заявки 
+        // и сообщение о успешной записи заявки в бд 
+        bidId = bid._id
+        res.status(201).json({bidId, message: "Заявка успешно создана"})
 
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так попробуйте снова'})
