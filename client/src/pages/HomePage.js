@@ -26,7 +26,7 @@ export const HomePage = () => {
                     </div>
             </div>
         </NavLink>
-        <NavLink to="/">
+        <NavLink to="/phonebook">
             <div className="col s3 hoverable">
                 <div className="home-icons-block">
                         <i className="large material-icons">contact_phone</i>
@@ -34,7 +34,7 @@ export const HomePage = () => {
                     </div>
             </div>
         </NavLink>
-        <NavLink to="/">
+        <NavLink to="/docs">
             <div className="col s3 hoverable">
                 <div className="home-icons-block">
                         <i className="large material-icons">library_books</i>

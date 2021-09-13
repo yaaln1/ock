@@ -6,3 +6,4 @@
 .env
 
 /client/jsondata.js
+/client/docs/

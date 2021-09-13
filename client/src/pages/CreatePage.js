@@ -79,8 +79,8 @@ export const CreatePage = () => {
 
     return (
         <div className="row">
-        <h2 className="center">Создать заявку</h2>
-            <div className="col s8 offset-s2 createpage">
+        <h4>Создать заявку</h4>
+            <div className="col s12 ">
             <form className="col s12">
                     <select className="browser-default" id="title" onChange={handleChange} value={form.title}>
                         <option value="" disabled>Выберите причину</option>
