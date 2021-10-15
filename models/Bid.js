@@ -1,6 +1,10 @@
 const {Schema, model, Types} = require ('mongoose')
 
 const bidSchema = new Schema({
+    manualid: {
+        type: String,
+        default: '-'
+    },
     title: {
         type: String,
         required: true
@@ -30,8 +34,8 @@ const bidSchema = new Schema({
         type: Date
     },
     executor: {
-        type: Types.ObjectId,
-        ref: 'User'
+        type: String,
+        default: '-'
     },
     completemessage: {
         type: String

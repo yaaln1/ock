@@ -16,7 +16,9 @@ export const BidsList = ({bids}) => {
               <th>Причина</th>
               <th>Сотрудник</th>
               <th>Отделение</th>
-              <th>Дата создания</th>
+              <th className="table_bidtime">Дата постановки</th>
+              <th>Выполнил</th>
+              <th className="table_bidtime">Дата выполнения</th>
               <th>Открыть</th>
           </tr>
         </thead>
@@ -29,9 +31,11 @@ export const BidsList = ({bids}) => {
                     <td>{index + 1}</td>
                     <td>{bid.status}</td>
                     <td>{bid.title}</td>
-                    <td>{bid.creator}</td>
+                    <td className="table_bidcreator">{bid.creator}</td>
                     <td>{bid.department}</td>
-                    <td>{date}</td>
+                    <td className="table_bidtime">{date}</td>
+                    <td className="table_bidcreator">{bid.executor}</td>
+                    <td className="table_bidtime">{bid.completetime}</td>
                     <td><Link to={`/detail/${bid._id}`}>Открыть</Link></td>
                 </tr>
               )

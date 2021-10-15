@@ -3,7 +3,7 @@ import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
 import { AuthContext } from '../context/Auth.context'
 import {useHistory} from 'react-router-dom'
-import {ock_contacts} from '../jsondata.js'
+import {ock_contacts, bids_title} from '../jsondata.js'
 import M from 'materialize-css'
 
 
@@ -61,7 +61,24 @@ export const CreatePage = () => {
     }
 
     useEffect(() => {
-        let elems = document.querySelectorAll(".autocomplete")
+        let bidtitleelems = document.querySelector("input[name=title]")
+        let bidtitleoptions = {
+            data: bids_title,
+            onAutocomplete(){
+                let titlevalue = document.getElementById("title")
+                let titlename = 'title'
+                setForm({...form, [titlename]: titlevalue.value})
+                console.log(titlevalue.value)
+
+            }
+        }
+        M.Autocomplete.init(bidtitleelems, bidtitleoptions)
+    
+        // eslint-disable-next-line
+      })
+
+    useEffect(() => {
+        let elems = document.querySelector("input[name=creator]")
         let options = {
             data: ock_contacts,
             onAutocomplete(){
@@ -76,19 +93,29 @@ export const CreatePage = () => {
     
         // eslint-disable-next-line
       })
+      
 
     return (
         <div className="row">
         <h4>Создать заявку</h4>
             <div className="col s12 ">
             <form className="col s12">
-                    <select className="browser-default" id="title" onChange={handleChange} value={form.title}>
-                        <option value="" disabled>Выберите причину</option>
-                        <option value="Заправка картриджа принтера">Заправка картриджа принтера</option>
-                        <option value="Проблемы с оборудованием">Проблемы с оборудованием</option>
-                        <option value="Проблемы в программе">Проблемы в программе</option>
-                        <option value="Другая причина">Другое...</option>
-                    </select>
+                    <div className="input-field">
+                        <input 
+                            id="title"
+                            type="text"
+                            name="title"
+                            maxLength="50"
+                            className="autocomplete"
+                            autoComplete="off" 
+                            onChange={handleChange}
+                            value={form.title}
+                        />
+                        <label htmlFor="title">Напишите причину</label>
+                    </div>
+
+
+
                 <br />
                 <div className="input-field">
                     <label htmlFor="createmessage">Опишите проблему</label>
@@ -127,6 +154,7 @@ export const CreatePage = () => {
                     <div className="input-field">
                         <input 
                             id="creator"
+                            name="creator"
                             type="text" 
                             maxLength="50"
                             className="autocomplete"

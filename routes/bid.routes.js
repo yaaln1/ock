@@ -31,14 +31,18 @@ router.post('/create',
         }
         // создается заявка со страницы CreatePage
         const {title, createmessage, department, cabinetnumber, creator} = req.body
-        const bid = new Bid({title, createmessage, department, cabinetnumber, creator})
+        //создаем свой manualid для удобства
+        const datenow = new Date()
+        const manualid = Date.parse(datenow)
+        console.log("manual - " + manualid)
+        const bid = new Bid({manualid, title, createmessage, department, cabinetnumber, creator})
         await bid.save()
         // Заявка сохранена
 
         // Собираем сообщение для администраторов о созданной заявке
         // добавляем ссылку на детальную страницу заявки и готовим шаблон сообщения
         const linkForAdmin = process.env.HOME_URL + '/detail/' + bid._id
-        const detailForAdmin = `Создана заявка №${bid._id} от ${creator} отделения ${department}.`
+        const detailForAdmin = `Создана заявка №${manualid} от ${creator} отделения ${department}.`
         // Все готово - сохраняем новое сообщение в базу данных
         const messageForAdmin = new Message({title, link: linkForAdmin, detail: detailForAdmin})
         const result = await messageForAdmin.save()
@@ -77,6 +81,20 @@ router.get('/:id', auth, async(req, res) => {
     try {
         const bid = await Bid.findById(req.params.id)
         res.json(bid)
+    } catch (e) {
+        res.status(500).json({message: 'Что-то пошло не так попробуйте снова'})
+    }
+})
+
+
+router.post('/start', auth, async(req, res) => {
+    try {
+        const {id, executor} = req.body
+        console.log(id + " автор " + executor)
+        const bid = await Bid.findByIdAndUpdate(id, { executor: executor })
+        console.log(bid)
+        res.json(bid)
+        res.status(500).json({message: executor})
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так попробуйте снова'})
     }

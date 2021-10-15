@@ -8,6 +8,16 @@ const ock_contacts = {
     "Подчинёнова Светлана Владимировна": null
 }
 
-const ock_department = ['ОТК', 'Регистратура', 'Выбраковка', 'Экспедиция', 'Бухгалтерия']
+const ock_department = ['ОТК', 'Регистратура', 'Выбраковка', 'Экспедиция', 'Бухгалтерия', 'ОИТ и ИБ', 'ОУ и РЧР']
 
-export {ock_contacts, ock_department}
+const bids_title = {
+    "Компьютер не включается": null,
+    "Заправка картриджа": null,
+    "Печать бланков": null,
+    "Печать штрих-кодов": null,
+    "Печать журнала": null,
+    "Не работает монитор": null,
+    "Проблемы с ЛИС": null
+}
+
+export {ock_contacts, ock_department, bids_title}

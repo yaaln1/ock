@@ -7,6 +7,9 @@ body {
     flex-direction: column;
   }
 
+.btn {
+    margin-right: 20px;
+}
   main {
     flex: 1 0 auto;
   }
@@ -106,6 +109,13 @@ body {
 
 .tabs .tab a:hover, .tabs .tab a.active {
     color: #1E88E5 !important;
+}
+
+.table_bidcreator {
+    max-width: 100px;
+}
+.table_bidtime {
+    max-width: 100px;
 }
 
 .collection .collection-item:hover {
