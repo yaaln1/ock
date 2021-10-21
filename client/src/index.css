@@ -32,6 +32,16 @@ body {
     box-shadow: 0 1px 0 0 #ffeb3b !important;
 }
 
+.iconcolorgreen {
+    color: green !important;
+}
+.iconcolorred {
+    color: red !important;
+}
+.iconcolorblue {
+    color: blue !important;
+}
+
 .home-icons-block {
     display: block;
     text-align: center;

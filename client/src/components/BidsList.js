@@ -8,6 +8,35 @@ export const BidsList = ({bids}) => {
     const reversed = bids.reverse()
     console.log(reversed)
     return (
+        <>
+
+
+            <div class="row no-print">
+                <div class="col s12 m12">
+                <div class="card blue darken-2">
+                    <div class="card-content white-text">
+                    <span class="card-title">Фильтр заявок</span>
+                    <p>Здесь выбираются даты по которым будет вестись фильтрация</p>
+                    </div>
+                    <input id="prevday" type="text" className="datepicker"/>
+                    <label for="prevday">Начальная дата</label>
+                    <input id="lastday" type="text" className="datepicker"/>
+                    <label for="lastday">Конечная дата</label>
+                    <div class="card-action">
+                    <a href="#!">Найти заявки</a>
+                    <a href="#!">Показать все</a>
+                    <a href="#!">В работе</a>
+                    <a href="#!">Выполненные</a>
+                    <a href="#!">Не подтвержденные</a>
+                    <a href="#!">Подтвержденные</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
         <table>
         <thead>
           <tr>
@@ -19,28 +48,47 @@ export const BidsList = ({bids}) => {
               <th className="table_bidtime">Дата постановки</th>
               <th>Выполнил</th>
               <th className="table_bidtime">Дата выполнения</th>
-              <th>Открыть</th>
+              <th className="no-print">Открыть</th>
           </tr>
         </thead>
 
         <tbody>
         { reversed.map((bid, index) => {
             const date = new Date(bid.createtime).toLocaleString()
+            let completedate
+            if (bid.completetime) {
+                completedate = new Date(bid.completetime).toLocaleString()
+            } else {completedate = "-"}
+
+            let bidStatusIcon
+            let bidIconColor 
+            if (bid.status === "new") {
+                bidStatusIcon = "brightness_1"
+                bidIconColor = "material-icons iconcolorred"
+            } else if (bid.status === "inwork") {
+                bidStatusIcon = "build"
+                bidIconColor = "material-icons iconcolorblue"
+            } else {
+                bidStatusIcon = "done_all"
+                bidIconColor = "material-icons iconcolorgreen"}
+            
             return (
                 <tr key={bid._id}>
                     <td>{index + 1}</td>
-                    <td>{bid.status}</td>
+                    <td><i className={bidIconColor}>{bidStatusIcon}</i></td>
                     <td>{bid.title}</td>
                     <td className="table_bidcreator">{bid.creator}</td>
                     <td>{bid.department}</td>
                     <td className="table_bidtime">{date}</td>
                     <td className="table_bidcreator">{bid.executor}</td>
-                    <td className="table_bidtime">{bid.completetime}</td>
-                    <td><Link to={`/detail/${bid._id}`}>Открыть</Link></td>
+                    <td className="table_bidtime">{completedate}</td>
+                    <td className="no-print"><Link to={`/detail/${bid._id}`}>Открыть</Link></td>
                 </tr>
               )
-        })}
+        }
+        )}
         </tbody>
       </table>
+      </>
     )
 }

@@ -3,12 +3,16 @@ import {useHttp} from '../hooks/http.hook'
 import {AuthContext} from '../context/Auth.context'
 import {Loader} from '../components/Loader'
 import { BidsList } from '../components/BidsList'
-import 'materialize-css'
+import M from 'materialize-css'
 
 export const BidsPage = () => {
     const [bids, setBids] = useState([])
     const {loading, request} = useHttp()
     const {token} = useContext(AuthContext)
+
+    useEffect(() => {
+        window.M.updateTextFields()
+    })
 
     const fetchBids = useCallback(async() => {
         try {

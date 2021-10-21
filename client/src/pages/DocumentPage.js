@@ -28,6 +28,10 @@ export const DocumentPage = () => {
                 <li className="collection-item"><div><a href="./docs/p1600000832.18-01-2021.rus.pdf" target="_blank" rel="noreferrer" className="secondary-content"><i className="small material-icons right">cloud_download</i></a>
                 Об утверждении единых требований в области информационно-коммуникационных технологий и обеспечения информационной безопасности</div>
                 </li>
+
+                <li className="collection-item"><div><a href="./docs/new.docx" target="_blank" rel="noreferrer" className="secondary-content"><i className="small material-icons right">cloud_download</i></a>
+                Обновленный справочник</div>
+                </li>
             
             </ul>
         </>

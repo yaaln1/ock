@@ -87,14 +87,22 @@ router.get('/:id', auth, async(req, res) => {
 })
 
 
-router.post('/start', auth, async(req, res) => {
+router.post('/start', async(req, res) => {
     try {
-        const {id, executor} = req.body
-        console.log(id + " автор " + executor)
-        const bid = await Bid.findByIdAndUpdate(id, { executor: executor })
-        console.log(bid)
-        res.json(bid)
-        res.status(500).json({message: executor})
+        const {id, status, executor} = req.body
+        if (status === "new") {
+            newstatus = "inwork"
+            await Bid.findByIdAndUpdate(id, { status: newstatus })
+            return res.status(201).json({message: "Вы начали выполнять заявку", status: newstatus, completetime: " ", executor: "-"})
+            
+        } else if (status === "inwork") {
+            newstatus = "done"
+            const datenow = Date.now()
+            await Bid.findByIdAndUpdate(id, { status: newstatus, completetime: datenow, executor: executor })
+            return res.status(201).json({message: "Заявка выполнена", status: newstatus, completetime: datenow, executor: executor})
+            
+        }
+        
     } catch (e) {
         res.status(500).json({message: 'Что-то пошло не так попробуйте снова'})
     }
