@@ -12,6 +12,7 @@ router.post('/register',
     check('login', 'Некорректный логин').isLength({min:5}),
     check('lastname', 'Ваш статус не указан').exists(),
     check('firstname', 'Ваш статус не указан').exists(),
+    check('fathername', 'Не указано отчество').exists(),
     check('password', 'Пароль должен содержать более 5 символов').isLength({min: 5}),
 ],
  async (req, res) => {
@@ -23,7 +24,7 @@ router.post('/register',
                 message: "Некорректные данные при регистрации"
             })
         }
-        const {login, lastname, firstname, password} = req.body
+        const {login, lastname, firstname, fathername, password} = req.body
 
         const candidate = await User.findOne({login})
         if (candidate) {
@@ -31,8 +32,8 @@ router.post('/register',
         }
 
         const hashedPassword = await bcrypt.hash(password, 12)
-        const fio = lastname + ' ' + firstname
-        const user = new User({login, lastname, firstname, fio, password: hashedPassword })
+        const fio = lastname + ' ' + firstname[0] + '.' + fathername[0] + '.'
+        const user = new User({login, lastname, firstname, fathername, fio, password: hashedPassword })
         await user.save()
 
         res.status(201).json({message: 'Пользователь успешно создан'})
@@ -72,7 +73,7 @@ router.post('/login',
         const token = jwt.sign(
             { userId: user.id, firstname: user.firstname, fio: user.fio, role: user.role },
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
+            { expiresIn: '10h' }
         )
      
         res.json({token, userId: user.id, firstname: user.firstname, fio: user.fio,  role: user.role})

@@ -7,6 +7,9 @@ body {
     flex-direction: column;
   }
 
+.btn {
+    margin-right: 20px;
+}
   main {
     flex: 1 0 auto;
   }
@@ -27,6 +30,19 @@ body {
 .authcard input:focus {
     border-bottom: 1px solid #ffeb3b !important;
     box-shadow: 0 1px 0 0 #ffeb3b !important;
+}
+
+.iconcolorgreen {
+    color: green !important;
+}
+.iconcolorred {
+    color: red !important;
+}
+.iconcolorblue {
+    color: blue !important;
+}
+.iconcolororange {
+    color: orange;
 }
 
 .home-icons-block {
@@ -90,6 +106,34 @@ body {
     padding-top: 0 !important;
 }
 
+.indicator {
+    background-color: #1E88E5 !important;
+}
+
+.tabs .tab a {
+    color: #039be5;
+}
+
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+    background-color: rgba(120, 174, 245, 0.2);
+    color: #1E88E5 !important;
+    outline: none;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active {
+    color: #1E88E5 !important;
+}
+
+.table_bidcreator {
+    max-width: 100px;
+}
+.table_bidtime {
+    max-width: 100px;
+}
+
+.collection .collection-item:hover {
+    background-color: rgb(197, 222, 230, 0.5);
+}
 
 
 

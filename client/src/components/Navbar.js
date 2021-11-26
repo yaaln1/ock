@@ -49,6 +49,7 @@ export const Navbar = () => {
         <>
         <li><a href="#!">Профиль</a></li>
         <li><a href="#!">Сообщения <span className="new badge red" data-badge-caption="новых">4</span></a></li>
+        <li><NavLink to ="/bids">Заявки</NavLink></li>
         <li className="divider"></li>
         <li><a href="/" onClick={logoutHandler}>Выход</a></li>
         </>
@@ -72,9 +73,12 @@ export const Navbar = () => {
                         </div>
                     </div>
                 </li>
-                <li><NavLink to="/">Главная</NavLink></li>
+                <li><NavLink to="/"><i className="material-icons">home</i></NavLink></li>
                 <li><NavLink to="/create">Создать</NavLink></li>
-                <li><NavLink to ="/bids">Заявки</NavLink></li>
+                <li><NavLink to="/phonebook">Справочник</NavLink></li>
+                <li><NavLink to="/docs">Документы</NavLink></li>
+                
+                
 
                 
                 <li><a className="dropdown-trigger" href="#!" data-target="dropdown1" >{(auth.isAuthenticated && auth.firstname) || 'Профиль'}<i className="material-icons right">account_circle</i></a></li> 

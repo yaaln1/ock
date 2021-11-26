@@ -32,6 +32,7 @@ export const BidsPage = () => {
 
     return (
         <>
+        <h4>Заявки</h4>
             {!loading && <BidsList bids={bids} />}
         </>
     )

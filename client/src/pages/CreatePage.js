@@ -3,7 +3,7 @@ import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
 import { AuthContext } from '../context/Auth.context'
 import {useHistory} from 'react-router-dom'
-import {ock_contacts} from '../jsondata.js'
+import {bids_title} from '../jsondata.js'
 import M from 'materialize-css'
 
 
@@ -28,7 +28,8 @@ export const CreatePage = () => {
         createmessage: '',
         department: '',
         cabinetnumber: '',
-        creator: ''
+        creator: auth.fio,
+        creatorId: auth.userId
     })
 
 
@@ -47,48 +48,75 @@ export const CreatePage = () => {
                 // получаем результат и выводим сообщение об ошибке или успешном результате
                 // получаем Id новой заявки    
                     message(data.message)
-                // Проверяем - авторизован ли пользователь
-                    if (auth.isAuthenticated && auth.role === 'admin') {
-                // Да - показываем детальную страницу заявки        
-                        history.push(`/detail/${data.bidId}`)
-                    } else {
+                // // Проверяем - авторизован ли пользователь
+                //     if (auth.isAuthenticated && auth.role === 'admin') {
+                // // Да - показываем детальную страницу заявки        
+                //         history.push(`/detail/${data.bidId}`)
+                //     } else {
                 // Нет - отправляем на главную страницу, где пользователь получает PopUp
                 // сообщение об успешном создании заявки         
                         history.push(`/`)
-                    }
+                    // }
             } catch (e) {}
             // Делаем редирект на главную страницу
     }
 
     useEffect(() => {
-        let elems = document.querySelectorAll(".autocomplete")
-        let options = {
-            data: ock_contacts,
+        let bidtitleelems = document.querySelector("input[name=title]")
+        let bidtitleoptions = {
+            data: bids_title,
             onAutocomplete(){
-                let inputcreator = document.getElementById("creator")
-                let creatorname = 'creator'
-                setForm({...form, [creatorname]: inputcreator.value})
-                console.log(inputcreator.value)
+                let titlevalue = document.getElementById("title")
+                let titlename = 'title'
+                setForm({...form, [titlename]: titlevalue.value})
+                console.log(titlevalue.value)
 
             }
         }
-        M.Autocomplete.init(elems, options)
+        M.Autocomplete.init(bidtitleelems, bidtitleoptions)
     
         // eslint-disable-next-line
       })
 
+    // useEffect(() => {
+    //     let elems = document.querySelector("input[name=creator]")
+    //     let options = {
+    //         data: ock_contacts,
+    //         onAutocomplete(){
+    //             let inputcreator = document.getElementById("creator")
+    //             let creatorname = 'creator'
+    //             setForm({...form, [creatorname]: inputcreator.value})
+    //             console.log(inputcreator.value)
+
+    //         }
+    //     }
+    //     M.Autocomplete.init(elems, options)
+    
+    //     // eslint-disable-next-line
+    //   })
+      
+
     return (
         <div className="row">
-        <h2 className="center">Создать заявку</h2>
-            <div className="col s8 offset-s2 createpage">
+        <h4>Создать заявку</h4>
+            <div className="col s12 ">
             <form className="col s12">
-                    <select className="browser-default" id="title" onChange={handleChange} value={form.title}>
-                        <option value="" disabled>Выберите причину</option>
-                        <option value="Заправка картриджа принтера">Заправка картриджа принтера</option>
-                        <option value="Проблемы с оборудованием">Проблемы с оборудованием</option>
-                        <option value="Проблемы в программе">Проблемы в программе</option>
-                        <option value="Другая причина">Другое...</option>
-                    </select>
+                    <div className="input-field">
+                        <input 
+                            id="title"
+                            type="text"
+                            name="title"
+                            maxLength="50"
+                            className="autocomplete"
+                            autoComplete="off" 
+                            onChange={handleChange}
+                            value={form.title}
+                        />
+                        <label htmlFor="title">Напишите причину</label>
+                    </div>
+
+
+
                 <br />
                 <div className="input-field">
                     <label htmlFor="createmessage">Опишите проблему</label>
@@ -123,19 +151,12 @@ export const CreatePage = () => {
                 </div>
 
                 <br />
+                <div class="input-field col s12">
+          <input disabled value={auth.fio} id="disabled" type="text" className="validate" />
+          <label for="disabled">ФИО заявителя</label>
+                </div>
 
-                    <div className="input-field">
-                        <input 
-                            id="creator"
-                            type="text" 
-                            maxLength="50"
-                            className="autocomplete"
-                            autoComplete="off" 
-                            onChange={handleChange}
-                            value={form.creator}
-                        />
-                        <label htmlFor="creator">ФИО заявителя</label>
-                    </div>
+                   
                 <button
                             className="btn grey lighten-1 black-text"
                             onClick={sendForm}

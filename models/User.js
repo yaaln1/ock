@@ -16,6 +16,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    fathername: {
+        type: String,
+        required: true
+    },
     fio: {
         type: String
     },
