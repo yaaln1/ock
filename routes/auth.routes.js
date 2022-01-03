@@ -10,10 +10,11 @@ const router = Router()
 router.post('/register',
 [
     check('login', 'Некорректный логин').isLength({min:5}),
-    check('lastname', 'Ваш статус не указан').exists(),
-    check('firstname', 'Ваш статус не указан').exists(),
+    check('lastname', 'Не указана фамилия').exists(),
+    check('firstname', 'Не указано имя').exists(),
     check('fathername', 'Не указано отчество').exists(),
-    check('password', 'Пароль должен содержать более 5 символов').isLength({min: 5}),
+    check('department', 'Не указано отделение').exists(),
+    check('password', 'Пароль должен содержать не менее 5 символов').isLength({min: 5}),
 ],
  async (req, res) => {
     try {
@@ -24,7 +25,7 @@ router.post('/register',
                 message: "Некорректные данные при регистрации"
             })
         }
-        const {login, lastname, firstname, fathername, password} = req.body
+        const {login, lastname, firstname, fathername, department, password} = req.body
 
         const candidate = await User.findOne({login})
         if (candidate) {
@@ -33,7 +34,7 @@ router.post('/register',
 
         const hashedPassword = await bcrypt.hash(password, 12)
         const fio = lastname + ' ' + firstname[0] + '.' + fathername[0] + '.'
-        const user = new User({login, lastname, firstname, fathername, fio, password: hashedPassword })
+        const user = new User({login, lastname, firstname, fathername, fio, department, password: hashedPassword })
         await user.save()
 
         res.status(201).json({message: 'Пользователь успешно создан'})
@@ -71,12 +72,12 @@ router.post('/login',
         }
 
         const token = jwt.sign(
-            { userId: user.id, firstname: user.firstname, fio: user.fio, role: user.role },
+            { userId: user.id, firstname: user.firstname, fio: user.fio, role: user.role, department: user.department },
             process.env.JWT_SECRET,
-            { expiresIn: '10h' }
+            { expiresIn: '500h' }
         )
      
-        res.json({token, userId: user.id, firstname: user.firstname, fio: user.fio,  role: user.role})
+        res.json({token, userId: user.id, firstname: user.firstname, fio: user.fio, role: user.role, department: user.department})
 
 
     } catch (e) {

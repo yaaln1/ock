@@ -20,9 +20,6 @@ const bidSchema = new Schema({
         type: String,
         required: true
     },
-    cabinetnumber: {
-        type: String
-    },
     creator: {
         type: String
     },

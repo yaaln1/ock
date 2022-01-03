@@ -135,6 +135,9 @@ body {
     background-color: rgb(197, 222, 230, 0.5);
 }
 
+.mintext {
+    font-size: x-small;
+}
 
 
 @media print {

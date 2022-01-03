@@ -31,6 +31,9 @@ const userSchema = new Schema({
         type: String,
         default: 'user'
     },
+    department: {
+        type: String
+    },
     message: [ {
         status: Boolean,
         title: String,

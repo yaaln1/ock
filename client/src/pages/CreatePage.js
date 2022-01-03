@@ -26,8 +26,7 @@ export const CreatePage = () => {
     const [form, setForm] = useState({
         title: '',
         createmessage: '',
-        department: '',
-        cabinetnumber: '',
+        department: auth.department,
         creator: auth.fio,
         creatorId: auth.userId
     })
@@ -123,38 +122,19 @@ export const CreatePage = () => {
                     <textarea id="createmessage" className="materialize-textarea" onChange={handleChange} textcontent={form.createmessage}></textarea>
                 </div>
                 <br />
-                <label>Отделение</label>
-                    <select className="browser-default" id="department" onChange={handleChange} value={form.department}>
-                        <option value="" disabled>Выберите отделение</option>
-                        <option value="ОТК">ОТК</option>
-                        <option value="Регистратура">Регистратура</option>
-                        <option value="Выбраковка">Выбраковка</option>
-                        <option value="ОКД">ОКД</option>
-                        <option value="Бухгалтерия">Бухгалтерия</option>
-                        <option value="ЛДИ">ЛДИ</option>
-                        <option value="Баклаборатория">Баклаборатория</option>
-                        <option value="Экспедиция">Экспедиция</option>
-                </select>
-                <br />
-                <div className="input-field"> 
-                <label htmlFor="cabinetnumber">№ кабинета</label>
-                        <input 
-                            id="cabinetnumber" 
-                            type="text" 
-                            autoComplete="off"
-                            maxLength="3"                          
-                            placeholder="Введите номер кабинета"
-                            onChange={handleChange}
-                            value={form.cabinetnumber}
-                            
-                        />   
+                <div className="input-field col s12">
+                <input disabled value={auth.department} id="department" type="text" className="validate" />
+                <label htmlFor="department">Отделение</label>
                 </div>
+                
 
                 <br />
-                <div class="input-field col s12">
+                <div className="input-field col s12">
           <input disabled value={auth.fio} id="disabled" type="text" className="validate" />
-          <label for="disabled">ФИО заявителя</label>
+          <label htmlFor="disabled">ФИО заявителя</label>
                 </div>
+
+                
 
                    
                 <button

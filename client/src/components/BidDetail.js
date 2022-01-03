@@ -70,7 +70,7 @@ export const BidDetail = (props) => {
             <h5>Заявка №{props.bid.manualid}</h5>
             <h3>{props.bid.title}</h3>
             <p>Автор: {props.bid.creator} </p>
-            <p>Кабинет №: {props.bid.cabinetnumber} Дата постановки: {date}</p>
+            <p>Дата постановки: {date}</p>
             <p>Текст заявки: {props.bid.createmessage}</p>
             <p>Отделение: {props.bid.department}</p>
             <p>Статус: <i className={bidIconColor}>{bidStatusIcon}</i> {bidStatusText}</p>

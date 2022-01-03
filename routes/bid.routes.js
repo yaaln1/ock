@@ -15,7 +15,6 @@ router.post('/create',
     check('title', 'Не выбрана причина заявки').exists({checkFalsy: true}),
     check('createmessage', 'Опишите причину вызова').exists({checkFalsy: true}),
     check('department', 'Не выбран отдел').exists({checkFalsy: true}),
-    check('cabinetnumber', 'Напишите номер кабинета').exists({checkFalsy: true}),
     check('creator', 'Введите ваше имя и фамилию').exists({checkFalsy: true})
 ], 
     async(req, res) => {
@@ -30,12 +29,12 @@ router.post('/create',
             })
         }
         // создается заявка со страницы CreatePage
-        const {title, createmessage, department, cabinetnumber, creator, creatorId} = req.body
+        const {title, createmessage, department, creator, creatorId} = req.body
         //создаем свой manualid для удобства
         const datenow = new Date()
         const manualid = Date.parse(datenow)
         console.log("manual - " + manualid)
-        const bid = new Bid({manualid, title, createmessage, department, cabinetnumber, creator, creatorId})
+        const bid = new Bid({manualid, title, createmessage, department, creator, creatorId})
         await bid.save()
         // Заявка сохранена
 

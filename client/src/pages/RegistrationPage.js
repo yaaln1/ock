@@ -7,7 +7,7 @@ export const RegistrationPage = () => {
     const message = useMessage()
     const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
-        login: '', lastname: '', firstname: '', fathername: '', password: ''
+        login: '', lastname: '', firstname: '', fathername: '', department: '', password: ''
     })
 
     useEffect(() => {
@@ -76,12 +76,23 @@ export const RegistrationPage = () => {
                             <input 
                             id="fathername" 
                             type="text" 
-                            placeholder="Введите фамилию"
+                            placeholder="Введите отчество"
                             name="fathername"
                             value={form.fathername}
                             onChange={changeHandler}
                             />
                             <label htmlFor="fathername">Отчество</label>
+                        </div>
+                        <div className="input-field">
+                            <input 
+                            id="department" 
+                            type="text" 
+                            placeholder="Введите отделение"
+                            name="department"
+                            value={form.department}
+                            onChange={changeHandler}
+                            />
+                            <label htmlFor="department">Отделение</label>
                         </div>
                         <div className="input-field">
                             <input 

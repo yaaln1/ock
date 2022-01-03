@@ -6,7 +6,7 @@ export const Footer = () => {
     return (
         <>
           <div className="footer-copyright blue darken-1">
-            <div className="container center">
+            <div className="container center mintext">
             © 2021 Adamovich Leonid
             
             </div>

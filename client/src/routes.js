@@ -73,14 +73,22 @@ export const useRoutes = (isAuthenticated, role) => {
     } else {
         return (
             <Switch>
+            <Route path="/docs" exact>
+                    <DocumentPage />
+            </Route>
             <Route path="/reg_admin_new" exact>
                 <RegistrationPage />
+            </Route>
+            <Route path="/phonebook" exact>
+                    <PhoneBookPage />
             </Route>
             <Route path="/login" exact> 
                 <AuthPage /> 
             </Route>
+            <Route path="/" exact>
+                <HomePage />
+            </Route>
             <Redirect to="/login" />
-
             </Switch>
         )
     }

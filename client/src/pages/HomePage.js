@@ -38,7 +38,7 @@ export const HomePage = () => {
             <div className="col s3 hoverable">
                 <div className="home-icons-block">
                         <i className="large material-icons">library_books</i>
-                        <p>Документы</p>
+                        <p>НПА</p>
                     </div>
             </div>
         </NavLink>
