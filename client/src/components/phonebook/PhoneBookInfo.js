@@ -6,7 +6,7 @@ export const PhoneBookInfo = () => {
             <p><b>Полное название:</b> КГП «КОСТАНАЙСКИЙ ОБЛАСТНОЙ ЦЕНТР КРОВИ» УЗАКО</p>
             <p><b>Адрес:</b> г.Костанай, ул.Быковского 4а</p>
             <p><b>Индекс:</b> 110005</p>
-            <p><b>Email приемная:</b> ock1@yandex.ru , ock_kos@med.mail.kz</p>
+            <p><b>Email приемная:</b> ock_kos@med.mail.kz</p>
             <p><b>Email бухгалтерия:</b> kostock@mail.ru</p>
 
             <table className="striped">

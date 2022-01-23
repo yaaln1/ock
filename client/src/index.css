@@ -64,6 +64,15 @@ body {
     color: gray;
 }
 
+.npa_filled_in {
+    margin-left: 15px;
+    padding: 5px;
+    padding-top: 10px;
+    border: #1E88E5;
+    border-width: 1px;
+    border-style: groove;
+    color:#000;
+}
 
 .padding_top {
     padding-top: 10%;

@@ -1,13 +1,16 @@
 require('dotenv').config()
 const express = require('express')
+const path = require('path')
 const mongoose = require('mongoose')
 
 const app = express()
 
 app.use(express.json({ extended: true }))
+app.use('/npa', express.static(path.join(__dirname, 'npa')))
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/bid', require('./routes/bid.routes'))
+app.use('/api/doc', require('./routes/doc.routes'))
 // app.use('/api/link', require('./routes/link.routes'))
 // app.use('/t', require('./routes/redirect.routes'))
 
