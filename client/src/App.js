@@ -10,7 +10,7 @@ import  'materialize-css'
 
 
 function App() {
-  const {token, login, logout, userId, department, firstname, fio, role, ready} = useAuth()
+  const {token, login, logout, userId, department, appointment, firstname, fio, fullname, role, ready} = useAuth()
   const isAuthenticated = !!token
   const routes = useRoutes(isAuthenticated, role)
   if(!ready) {
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <AuthContext.Provider value={{
-      token, login, logout, userId, department, firstname, fio, role, isAuthenticated
+      token, login, logout, userId, department, appointment, firstname, fio, fullname, role, isAuthenticated
     }}>
     
       <Router>

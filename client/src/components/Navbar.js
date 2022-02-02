@@ -47,7 +47,7 @@ export const Navbar = () => {
         <ul id="dropdown1" className="dropdown-content">
       {(auth.isAuthenticated && 
         <>
-        <li><a href="#!">Профиль</a></li>
+        <li><NavLink to="/profile">Профиль</NavLink></li>
         <li><a href="#!">Сообщения <span className="new badge red" data-badge-caption="новых">4</span></a></li>
         <li><NavLink to ="/bids">Заявки</NavLink></li>
         <li className="divider"></li>
@@ -81,7 +81,7 @@ export const Navbar = () => {
                 
 
                 
-                <li><a className="dropdown-trigger" href="#!" data-target="dropdown1" >{(auth.isAuthenticated && auth.firstname) || 'Профиль'}<i className="material-icons right">account_circle</i></a></li> 
+                <li><a className="dropdown-trigger" href="#!" data-target="dropdown1" >{(auth.isAuthenticated && auth.firstname) || 'Профиль'} <i className="material-icons right">account_circle</i></a></li> 
       
                 
             </ul>

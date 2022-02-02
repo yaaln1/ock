@@ -8,6 +8,9 @@ import { HomePage } from "./pages/HomePage"
 import { RegistrationPage } from "./pages/RegistrationPage"
 import { PhoneBookPage } from "./pages/PhoneBookPage"
 import { DocumentPage } from "./pages/DocumentPage"
+import { ProfilePage } from "./pages/profile/ProfilePage"
+import { StaffPage } from "./pages/profile/StaffPage"
+import { MyDepartmentPage } from "./pages/profile/MyDepartmentPage"
 
 
 
@@ -32,6 +35,15 @@ export const useRoutes = (isAuthenticated, role) => {
                 </Route>
                 <Route path="/phonebook" exact>
                     <PhoneBookPage />
+                </Route>
+                <Route path="/profile" exact>
+                    <ProfilePage />
+                </Route>
+                <Route path="/profile/staff" exact>
+                    <StaffPage />
+                </Route>
+                <Route path="/profile/mydepartment" exact>
+                    <MyDepartmentPage />
                 </Route>
                 <Route path="/" exact>
                     <HomePage />
@@ -64,6 +76,15 @@ export const useRoutes = (isAuthenticated, role) => {
             <Route path="/phonebook" exact>
                     <PhoneBookPage />
             </Route>
+            <Route path="/profile" exact>
+                    <ProfilePage />
+                </Route>
+            <Route path="/profile/staff" exact>
+                    <StaffPage />
+                </Route>
+            <Route path="/profile/mydepartment" exact>
+                    <MyDepartmentPage />
+                </Route>
             <Route path="/" exact>
                 <HomePage />
             </Route>

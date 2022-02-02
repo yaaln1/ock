@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
+import { ock_department } from '../jsondata'
 import 'materialize-css'
 
 export const RegistrationPage = () => {
     const message = useMessage()
     const {loading, request, error, clearError} = useHttp()
     const [form, setForm] = useState({
-        login: '', lastname: '', firstname: '', fathername: '', department: '', password: ''
+        login: '', lastname: '', firstname: '', fathername: '', department: '', appointment: '', password: ''
     })
 
     useEffect(() => {
@@ -25,6 +26,7 @@ export const RegistrationPage = () => {
 
     const registerHandler = async() => {
         try {
+           // console.log(form)
             const data = await request('api/auth/register', 'POST', {...form})
             message(data.message)
         } catch (e) {
@@ -83,7 +85,7 @@ export const RegistrationPage = () => {
                             />
                             <label htmlFor="fathername">Отчество</label>
                         </div>
-                        <div className="input-field">
+                        {/* <div className="input-field">
                             <input 
                             id="department" 
                             type="text" 
@@ -93,6 +95,28 @@ export const RegistrationPage = () => {
                             onChange={changeHandler}
                             />
                             <label htmlFor="department">Отделение</label>
+                        </div> */}
+                        <div className="input-field">
+                            <select className="browser-default" name="department" value={form.department} onChange={changeHandler}>
+                                        <option value="" disabled>Выберите отделение</option>
+                                            {
+                                                ock_department.map((element, i) => {
+                                                    return <option key={i} value={element}>{element}</option>
+                                                })
+                                            }     
+                                    </select>
+                        </div>
+                        
+                        <div className="input-field">
+                            <input 
+                            id="appointment" 
+                            type="text" 
+                            placeholder="Введите должность"
+                            name="appointment"
+                            value={form.appointment}
+                            onChange={changeHandler}
+                            />
+                            <label htmlFor="department">Должность</label>
                         </div>
                         <div className="input-field">
                             <input 

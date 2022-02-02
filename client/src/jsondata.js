@@ -9,6 +9,7 @@ const ock_contacts = {
 }
 
 const ock_department = ['ОТК', 'Регистратура', 'Выбраковка', 'Экспедиция', 'Бухгалтерия', 'ОИТ и ИБ', 'ОУ и РЧР']
+const user_mark = ['работа', 'выезд', 'командировка', 'больничный']
 
 const bids_title = {
     "Компьютер не включается": null,
@@ -20,4 +21,6 @@ const bids_title = {
     "Проблемы с ЛИС": null
 }
 
-export {ock_contacts, ock_department, bids_title}
+const localhost_ip = 'http://127.0.0.1:3000/'
+
+export {ock_contacts, ock_department, user_mark, bids_title, localhost_ip}

@@ -20,9 +20,9 @@ router.post('/upload',
     
         let title = req.file.originalname.slice(0, -4)
         let path = req.file.path.replace(/ /g, '%20')
-        let link = '.' + path.slice(18)
+        let link = './' + path.slice(19)
 
-        console.log(doctype + " " + status + " " + link + " " + title)
+       // console.log(doctype + " " + status + " " + link + " " + title)
 
         if (req.file) {
             file = req.file

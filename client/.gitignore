@@ -12,6 +12,7 @@
 /build
 /docs
 /client/public/docs
+/images/
 
 # misc
 .DS_Store

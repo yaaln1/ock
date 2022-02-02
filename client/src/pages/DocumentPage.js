@@ -33,7 +33,7 @@ export const DocumentPage = () => {
 
 const [doc, setDoc] = useState(null)
 const [checknpa, setChecknpa] = useState(false)
-const [npa_documentss, setNpa_documentss] = useState(null)
+// const [npa_documentss, setNpa_documentss] = useState(null)
 
 const fetchDocs = useCallback(async() => {
     try {
@@ -60,17 +60,18 @@ const sendFile = useCallback(async () => {
             }
         })
 
-        setNpa_documentss(result.data.file.path)
+        // setNpa_documentss(result.data.file.path)
         message(result.data.message)
         fetchDocs()
+        setChecknpa(false)
 
     } catch (e) {}
-}, [doc, checknpa, message, fetchDocs])
+}, [doc, checknpa, message, fetchDocs, setChecknpa])
 
 const handleChangeNpa = (event) => {
     try {
         setChecknpa(!checknpa)
-        console.log(checknpa)
+       // console.log(checknpa)
     } catch (e) {
     }
 }
@@ -104,7 +105,6 @@ if (loading) {
                     </label>
                     </div>
                     <small className="form-text">Только PDF-файлы</small>
-                    <p>{npa_documentss}</p>
                 </>) }
 
                 {(!loading && <DocsList docs={docs} />)}

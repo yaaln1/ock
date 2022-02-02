@@ -34,12 +34,24 @@ const userSchema = new Schema({
     department: {
         type: String
     },
+    appointment: {
+        type: String
+    },
     message: [ {
         status: Boolean,
         title: String,
         detail: String,
         link: String
-    } ]
+    } ],
+    mark: [ {
+        date: String,
+        status: String,
+        detail: String
+    } ],
+    active: {
+        type: Boolean,
+        default: true
+    }
 })
 
 module.exports = model('User', userSchema)
