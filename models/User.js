@@ -23,6 +23,9 @@ const userSchema = new Schema({
     fio: {
         type: String
     },
+    avatar: {
+        type: String
+    },
     password: {
         type: String,
         required: true

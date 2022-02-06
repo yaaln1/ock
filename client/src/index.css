@@ -158,13 +158,22 @@ body {
 .collection .collection-item:hover {
     background-color: rgb(197, 222, 230, 0.5);
 }
+.reporttabletext {
+    font-size: small !important;
+}
 
 .mintext {
     font-size: x-small;
 }
-
+.invisibleprint {
+    display: none;
+}
 
 @media print {
+
+    .invisibleprint {
+        display: inline;
+    }
     body {
         color: #000;
         background: #fff;
@@ -177,13 +186,19 @@ body {
         min-width: 100%;
         max-width: 100%;
     }
-    .printhead {
+    .print-h {
+        display: block;
+        font-size: medium;
+        margin-top: 50px !important;
+        margin-bottom: 15px;
+    }
+    /* .printhead {
         min-width: 100%;
         min-height: 5cm;
         background-image: url("./images/new_logo_rus.png");
         background-repeat: no-repeat;
         background-position: center;
-    }
+    } */
 
     .no-print {
         display: none;

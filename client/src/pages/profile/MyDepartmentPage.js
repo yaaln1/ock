@@ -15,7 +15,8 @@ export const MyDepartmentPage = () => {
     const {token} = useContext(AuthContext)
     const [users, setUsers] = useState([])
     const {loading, request, error, clearError} = useHttp()
-    const [form, setForm] = useState([])
+    const [form, setForm] = useState({})
+    const [detail, setDetail] = useState({})
 
 
     useEffect(() => {
@@ -28,7 +29,7 @@ export const MyDepartmentPage = () => {
             const fetched = await request('/api/user/mydepartment', 'GET', null, {
                 Authorization: `Bearer ${token}`
             })
-            setUsers(fetched)
+            await setUsers(fetched)
         } catch (e) {
     
         }
@@ -43,11 +44,20 @@ export const MyDepartmentPage = () => {
         setForm({...form, [event.target.id]: result})
         console.log(form)
     }
+    const changeTextHandler = event => {
+        let userdetail = "userdetail"
+        const result = {[userdetail]: event.target.value}
+        setDetail({...detail, [event.target.name]: result})
+        console.log(detail)
+    }
+
 
     const sendForm = async () => {
         try {
             // отправляем данные, полученные с формы для формирования и сохранения заявки в БД
-                const result = await request('/api/user/markdepartment', 'POST', {...form}, {Authorization: `Bearer ${auth.token}`}) 
+                const result = await request('/api/user/markdepartment', 'POST', {form, detail}, {Authorization: `Bearer ${auth.token}`}) 
+                message(result.message)
+                await fetchUsers()
                 console.log(result)
 
         } catch (e) {}
@@ -95,18 +105,31 @@ useEffect(() => {
                 </thead>
                 <tbody>
                 {users.map((user, index) => {
+                    const todayDate = new Date()
+                    const date = todayDate.getFullYear() + "_" + (todayDate.getMonth() + 1) + "_" + todayDate.getDate()
+
+                            let todayMark = "-" 
+                            let todayDetail = "-"
+                       
+                            for (let y = 0; y < Object.keys(user.mark).length; y++){
+                                if (user.mark[y].date === date){
+                                    todayMark = user.mark[y].status
+                                    todayDetail = user.mark[y].detail
+                                }
+                            }
+                        
                     return(
                         
                         <tr key={index}>
                             <td>{index + 1}</td>
                             <td key={index}>{user.lastname} {user.firstname} {user.fathername}</td>
                             <td>{user.appointment}</td>
-                            <td>{user.department}</td>
-                            <td>Примечание</td>
+                            <td>{todayMark}</td>
+                            <td>{todayDetail}</td>
                             <td className="no-print">
                                 <div className="input-field">
                                         <select id={index} defaultValue={"default"} className="browser-default" name={user._id} onChange={changeHandler}>
-                                            <option value="default" disabled>Выберите отделение</option>
+                                            <option value="default" disabled>Выберите отметку</option>
                                                 {
                                                     user_mark.map((mark, i) => {
                                                         return <option key={i} value={mark}>{mark}</option>
@@ -115,7 +138,17 @@ useEffect(() => {
                                         </select>
                                 </div>
                             </td>
-                            <td className="no-print">Сделать примечание</td>
+                            <td className="no-print">
+                            <div className="input-field">
+                                <input
+                                type="text" 
+                                placeholder="Введите примечание"
+                                name={index}
+                                // value={form.firstname}
+                                onChange={changeTextHandler}
+                                />
+                        </div>
+                            </td>
                         </tr>
                         
                     )
